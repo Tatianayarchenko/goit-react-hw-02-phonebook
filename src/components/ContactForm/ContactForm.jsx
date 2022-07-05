@@ -1,25 +1,7 @@
 import { Component } from 'react';
-// import { nanoid } from 'nanoid';
-export class ContactForm extends Component {
-  static propTypes = {
-    // Statistics: {
-    //   good: PropTypes.number.isRequired,
-    //   neutral: PropTypes.number.isRequired,
-    //   bad: PropTypes.number.isRequired,
-    //   total: PropTypes.number.isRequired,
-    //   positivePercentage: PropTypes.number.isRequired,
-    // },
-    // Section: {
-    //   title: PropTypes.string.isRequired,
-    //   children: PropTypes.node.isRequired,
-    // },
-    // Notification: { message: PropTypes.string.isRequired },
-    // FeedbackOptions: {
-    //   options: PropTypes.objectOf(PropTypes.string).isRequired,
-    //   onLeaveFeedback: PropTypes.object.isRequired,
-    // },
-  };
+import PropTypes from 'prop-types';
 
+export class ContactForm extends Component {
   state = {
     name: '',
     number: '',
@@ -32,8 +14,6 @@ export class ContactForm extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    // const { name, number } = this.state;
-    console.log(this.state);
     this.props.onSubmit(this.state);
     this.reset();
   };
@@ -43,7 +23,6 @@ export class ContactForm extends Component {
   };
 
   render() {
-    // const { name, number } = this.state;
     return (
       <form onSubmit={this.handleSubmit}>
         <label>
@@ -76,6 +55,6 @@ export class ContactForm extends Component {
   }
 }
 
-// export const ContactForm = ({ onSubmit, value, onChange }) => (
-
-// );
+ContactForm.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+};
