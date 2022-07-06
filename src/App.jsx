@@ -3,6 +3,7 @@ import { nanoid } from 'nanoid';
 import { ContactForm } from 'components/ContactForm';
 import { Contacts } from 'components/Contacts';
 import { Filter } from 'components/Filter';
+import { Container } from 'Common.styled';
 
 export class App extends Component {
   state = {
@@ -22,19 +23,14 @@ export class App extends Component {
       number: data.number,
     };
 
-    this.checkSameName(data.name)
+    const normalizedName = contact.name.toLowerCase();
+    this.state.contacts.find(
+      contact => contact.name.toLowerCase() === normalizedName
+    )
       ? alert(`${data.name} is already in contacts`)
       : this.setState(prevState => ({
           contacts: [contact, ...prevState.contacts],
         }));
-  };
-
-  checkSameName = name => {
-    const { contacts } = this.state;
-    const normalizedName = name.toLowerCase();
-    return contacts.find(
-      contact => contact.name.toLowerCase() === normalizedName
-    );
   };
 
   deleteContact = contactId => {
@@ -49,7 +45,6 @@ export class App extends Component {
 
   getVisibleContacts = () => {
     const { contacts, filter } = this.state;
-
     const normalizedFilter = filter.toLowerCase();
     return contacts.filter(contact =>
       contact.name.toLowerCase().includes(normalizedFilter)
@@ -60,17 +55,7 @@ export class App extends Component {
     const visibleContacts = this.getVisibleContacts();
 
     return (
-      <div
-        style={{
-          padding: '20px',
-          // height: '100vh',
-          // display: 'flex',
-          // justifyContent: 'center',
-          // alignItems: 'center',
-          // fontSize: 40,
-          // color: '#010101'
-        }}
-      >
+      <Container>
         <h1>Phonebook</h1>
         <ContactForm onSubmit={this.formSubmitHendler} />
         <h2>Contacts</h2>
@@ -79,7 +64,7 @@ export class App extends Component {
           contacts={visibleContacts}
           onDeleteContact={this.deleteContact}
         />
-      </div>
+      </Container>
     );
   }
 }
