@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Button, Input } from '../../Common.styled';
+import { Button, Input } from '../UI/Common.styled';
 
 export class ContactForm extends Component {
   state = {
